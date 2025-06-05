@@ -1,6 +1,14 @@
 spring:
   application:
     name: api-gateway
+    
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 1.0 # Ensures all requests are traced
+  zipkin:
+    base-url: http://localhost:9411 # Location of your Zipkin Server
+    
   cloud:
     gateway:
       routes:
@@ -18,26 +26,29 @@ spring:
           uri: lb://MICROSERVICE2
           predicates:
             - Path=/microservice2/**
-  sleuth:
-    enabled: true
-    sampler:
-      probability: 1.0 # Ensures all requests are traced
-  zipkin:
-    base-url: http://localhost:9411 # Location of your Zipkin Server
 
 logging:
   level:
     org.springframework.cloud.sleuth: DEBUG # Optional, for verbose tracing info
-    management:
-      metrics:
-        export:
-          influx:
-            enabled: true
-            db: micrometer
-            uri: http://localhost:8686 # Replace with your InfluxDB URL
-            user-name: user
-            password: password
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  influx:
+    metrics:
+      export:
+        enabled: true
+        uri: http://localhost:8686
+        db: my-metrics-db
+        user-name: myuser
+        password: mypassword
+        step: 10s
+        
 server:
   port: 8086
 
