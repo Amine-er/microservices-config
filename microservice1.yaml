@@ -49,7 +49,7 @@ logging:
           influx:
             enabled: true
             db: micrometer
-            uri: http://localhost:8086 # Replace with your InfluxDB URL
+            uri: http://localhost:8686 # Replace with your InfluxDB URL
             user-name: user
             password: password
 
