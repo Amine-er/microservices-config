@@ -43,15 +43,24 @@ springdoc:
 logging:
   level:
     org.springframework.cloud.sleuth: DEBUG # Optional, for verbose tracing info
-    management:
-      metrics:
-        export:
-          influx:
-            enabled: true
-            db: micrometer
-            uri: http://localhost:8686 # Replace with your InfluxDB URL
-            user-name: user
-            password: password
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  influx:
+    metrics:
+      export:
+        enabled: true
+        uri: http://localhost:8686
+        db: my-metrics-db
+        user-name: myuser
+        password: mypassword
+        step: 10s
 
 eureka:
   instance:
