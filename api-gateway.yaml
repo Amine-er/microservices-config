@@ -39,15 +39,6 @@ management:
   zipkin:
     tracing:
       endpoint: http://localhost:9411/api/v2/spans
-  influx:
-    metrics:
-      export:
-        enabled: true
-        bucket: micrometer
-        uri: http://localhost:8686
-        org: my-org
-        token: k7Ab54m-sZMJaNXrQGJrjnGonk-FOEgAVWhTmA3w6uAwj-Pt0YD_XNuO0MqpqOJPobl3N_od_dm-66pucbPIAg==
-        step: 10s
         
 server:
   port: 8086
