@@ -56,10 +56,11 @@ management:
     metrics:
       export:
         enabled: true
-        db: micrometer
+        bucket: micrometer
         uri: http://localhost:8686
-        user-name: user
-        password: password
+        org: my-org
+        token: k7Ab54m-sZMJaNXrQGJrjnGonk-FOEgAVWhTmA3w6uAwj-Pt0YD_XNuO0MqpqOJPobl3N_od_dm-66pucbPIAg==
+        step: 10s
   
 eureka:
   instance:
