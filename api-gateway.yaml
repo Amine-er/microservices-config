@@ -4,6 +4,9 @@ spring:
     
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes:
         - id: microservice1
           uri: lb://MICROSERVICE1
@@ -19,6 +22,9 @@ spring:
           uri: lb://MICROSERVICE2
           predicates:
             - Path=/microservice2/**
+    loadbalancer:
+      ribbon:
+        enabled: false
 
 logging:
   level:
@@ -36,6 +42,9 @@ management:
     enabled: true
     sampling:
       probability: 1.0
+  metrics:
+    tracing:
+      enabled: true
   zipkin:
     tracing:
       endpoint: http://localhost:9411/api/v2/spans
