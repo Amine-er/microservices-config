@@ -48,7 +48,7 @@ management:
   tracing:
     enabled: true
     sampling:
-      probability: 0.1
+      probability: 1.0
   influx:
     metrics:
       export:
@@ -57,10 +57,7 @@ management:
         uri: http://localhost:8686
         user-name: user
         password: password
-  zipkin:
-    tracing:
-      endpoint: http://localhost:9411/
-
+  
 eureka:
   instance:
     prefer-ip-address: true
