@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: api-gateway
+    
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: microservice1
+          uri: lb://MICROSERVICE1
+          predicates:
+            - Path=/microservice1/**
+          filters:
+            - RoleValidationFilter
+        - id: swagger-ui
+          uri: lb://MICROSERVICE1
+          predicates:
+            - Path=/openapi/**
+        - id: microservice2
+          uri: lb://MICROSERVICE2
+          predicates:
+            - Path=/microservice2/**
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+logging:
+  level:
+    org.springframework.cloud.sleuth: DEBUG # Optional, for verbose tracing info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  metrics:
+    tracing:
+      enabled: true
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+        
+server:
+  port: 8086
+
+role-validation:
+  enabled: false
+  required-role: microservice1
+  client-name: myclient
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
