@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: microservice1
+    
+  datasource:
+    url: jdbc:h2:mem:microservice1db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        connection:
+          autocommit: false
+        format_sql: true
+
+server:
+  port: 8082
+  forward-headers-strategy: framework
+
+grpc:
+  server:
+    port: 9090
+
+
+springdoc:
+  swagger-ui.path: /openapi/swagger-ui.html
+  api-docs.path: /openapi/v3/api-docs
+  pathsToMatch: /**
+
+logging:
+  level:
+    org.springframework.cloud.sleuth: DEBUG # Optional, for verbose tracing info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  metrics:
+    tracing:
+      enabled: true
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
