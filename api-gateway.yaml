@@ -8,18 +8,18 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: microservice1
-          uri: lb://MICROSERVICE1
+        - id: product-service
+          uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/microservice1/**
           filters:
             - RoleValidationFilter
         - id: swagger-ui
-          uri: lb://MICROSERVICE1
+          uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/openapi/**
-        - id: microservice2
-          uri: lb://MICROSERVICE2
+        - id: customer-service
+          uri: lb://CUSTOMER-SERVICE
           predicates:
             - Path=/microservice2/**
     loadbalancer:
