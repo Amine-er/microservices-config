@@ -7,6 +7,9 @@ spring:
       host: mongo
       port: 27017
       database: reviewdb
+      username: reviewuser
+      password: reviewpass
+      authentication-database: admin
 
 server:
   port: 7001
