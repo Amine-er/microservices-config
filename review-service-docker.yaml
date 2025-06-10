@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: review-service
+
+  data:
+    mongodb:
+      host: mongo
+      port: 27017
+      database: reviewdb
+
+server:
+  port: 7001
+
+logging:
+  level:
+    org.springframework.cloud.sleuth: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
