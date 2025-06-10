@@ -9,7 +9,7 @@ spring:
       database: reviewdb
       username: reviewuser
       password: reviewpass
-      authentication-database: admin
+      authentication-database: reviewdb
 
 server:
   port: 7001
