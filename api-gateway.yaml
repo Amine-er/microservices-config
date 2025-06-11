@@ -22,6 +22,11 @@ spring:
           uri: lb://CUSTOMER-SERVICE
           predicates:
             - Path=/microservice2/**
+        - id: review-service
+          uri: lb://REVIEW-SERVICE
+          predicates:
+            - Path=/api/reviews/**
+
     loadbalancer:
       ribbon:
         enabled: false
