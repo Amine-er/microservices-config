@@ -13,6 +13,15 @@ spring:
     username: user
     password: password
     driver-class-name: org.postgresql.Driver
+
+  jpa:
+      hibernate:
+        ddl-auto: validate
+      show-sql: true
+      properties:
+        hibernate:
+          default_schema: schema1
+          dialect: org.hibernate.dialect.PostgreSQLDialect
     
 server:
   port: 8082
