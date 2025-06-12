@@ -11,7 +11,7 @@ spring:
         - id: product-service
           uri: lb://PRODUCT-SERVICE
           predicates:
-            - Path=/microservice1/**
+            - Path=/api/products/**
           filters:
             - RoleValidationFilter
         - id: swagger-ui
@@ -21,7 +21,7 @@ spring:
         - id: customer-service
           uri: lb://CUSTOMER-SERVICE
           predicates:
-            - Path=/microservice2/**
+            - Path=/api/customers/**
         - id: review-service
           uri: lb://REVIEW-SERVICE
           predicates:
