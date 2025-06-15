@@ -11,21 +11,25 @@ spring:
         - id: product-service
           uri: lb://PRODUCT-SERVICE
           predicates:
-            - Path=/microservice1/**
+            - Path=/api/products/**
           filters:
-            - RoleValidationFilter
+            - RoleValidationFilter=ROLE_PRODUCT,product-service
         - id: swagger-ui
-          uri: lb://PRODUCT-SERVICE
+          uri: lb://PRODUCT-SERVICE 
           predicates:
             - Path=/openapi/**
         - id: customer-service
           uri: lb://CUSTOMER-SERVICE
           predicates:
-            - Path=/microservice2/**
+            - Path=/api/customers/**
+          filters:
+            - RoleValidationFilter=ROLE_CUSTOMER,customer-service
         - id: review-service
           uri: lb://REVIEW-SERVICE
           predicates:
             - Path=/api/reviews/**
+          filters:
+            - RoleValidationFilter=ROLE_REVIEW,review-service
 
     loadbalancer:
       ribbon:
@@ -57,13 +61,7 @@ management:
 server:
   port: 8086
 
-role-validation:
-  enabled: false
-  required-role: microservice1
-  client-name: myclient
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
