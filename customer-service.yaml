@@ -2,22 +2,26 @@ spring:
   application:
     name: customer-service
     
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    schemas: schema1
+    locations: classpath:db/migration
+    
   datasource:
-    url: jdbc:h2:mem:microservice2db
-    driver-class-name: org.h2.Driver
-    username: sa
+    url: jdbc:postgresql://localhost:5432/shared_db
+    username: user
     password: password
+    driver-class-name: org.postgresql.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: true
-    hibernate:
-      ddl-auto: create-drop
-    properties:
       hibernate:
-        connection:
-          autocommit: false
-        format_sql: true
+        ddl-auto: none
+      show-sql: true
+      properties:
+        hibernate:
+          default_schema: schema2
+          dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
   port: 8081
